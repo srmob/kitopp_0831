@@ -1,0 +1,58 @@
+<ion-view view-title="My Orders" cache-view="false" >
+   <form name="mainbuyerOrderForm">
+    <ion-nav-view name="menuContent"></ion-nav-view>
+    <ion-content padding="true" scroll="false"> <!--orderTotal={{orderTotal}}-->
+        <ion-scroll direction="y" style="width: 100% ;height: 100% !important;"> 
+            <div class="list" ng-repeat="(key,value) in orders | groupBy:'product_sub_catg_name'">
+               <div class="row">
+                    <span class="col col-60 item item-positive"> {{key | uppercase }} </span>
+                    <span class="col col-40 item item-positive"> Total : {{ orderTotal | currency:"&#8377;" : 2}} </span>
+                </div>
+                <div class="list card" ng-repeat="row in value" ng-form='rowOrderForm' name="rowOrderForm" ng-init="setOrderTotal(value)"> 
+                  <div class="item item-avatar item-light">
+                        <img ng-src="{{productImageUrl}}{{row.product_id}}/index/0">
+                        <h2>
+                          {{row.product_name}} 
+                          <span class="item-note" >[ ID: {{row.product_id | uppercase}} ]</span>
+                        </h2>
+                        <br><div class="item-text-wrap descEllip">{{row.product_desc}}</div>
+
+                      <br>
+                        <label class="subdued royal">
+                            Lot Size:
+                            <label class="subdued dark">{{row.product_lot_size}}</u></b></label>
+                        </label>
+                        <label class="subdued royal" style="float:right">
+                            Price:
+                            <label class="subdued dark">{{ row.order_price | currency:"&#8377;" : 0 }}</b></label>
+                        </label>
+
+                  </div>
+                    <div class="item tabs tabs-secondary item-stable row">
+                       <!--<div class="row">-->
+                           <div class="col col-60">
+                               <label class="tab-item item-input" ng-class="{ 'has-error-lr' : rowOrderForm.order_qty.$dirty && rowOrderForm.order_qty.$invalid, 'valid' : rowOrderForm.order_qty.$valid}"> 
+                                    <label class="subdued royal" style="float:left"> Quantity:</label>
+                                    <br><span class="item-note" ng-show="rowOrderForm.order_qty.$invalid" style="color:maroon">(min 1) </span>
+                                   <label class="subdued dark"><input type="number" ng-model="row.order_qty" value='{{row.order_qty}}' name="order_qty" min="0" maxlength="10" ng-pattern="onlyNumbers1" ng-change="setOrderTotal(value)" required></label>
+                                </label>
+                            </div>
+                           <div class="col col-40">
+                               <span class="tab-item">
+                                 <label class="subdued royal" style="float:right">Estimate:
+                                    <label class="subdued dark">
+                                        {{ row.order_price * row.order_qty | currency:"&#8377;" : 2 }}</label>
+                                </label>
+                                </span>
+                           </div>
+                      <!-- </div>-->
+                    </div>
+                </div> 
+            </div>
+        </ion-scroll>
+    </ion-content>
+        <ion-footer-bar align-title="center" class="button-bar bar-balanced">
+        <button class="button button-clear" type="submit" ng-disabled="mainbuyerOrderForm.$invalid" ng-click="placeOrder()">Order Now</button>
+        </ion-footer-bar>
+    </form>
+</ion-view>
