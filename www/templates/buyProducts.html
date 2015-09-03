@@ -49,7 +49,7 @@
                         <div class="item-text-wrap descEllip"> {{ products[$index].product_desc }}  </div>
                     </div> 
                     <div class="col col-25"> 
-                        <label class="checkbox checkbox-dark"> 
+                        <label class="checkbox checkbox-dark checkbox-square"> 
                             <input type="checkbox"  checklist-model="checkboxes.prodid" 
                             checklist-value="products[$index].product_id" checklist-change="checkBoxClicked([$index])" >  <!--ng-change="checkBoxChange(products[$index].PROD_MIN_QTY,products[$index].product_id)"-->
                             <!--<input type="checkbox"  ng-model="products[$index].checked" 
@@ -123,7 +123,7 @@
                                 <div class="item-text-wrap descEllip"> {{ products[$index+1].product_desc }}  </div>
                             </div> 
                             <div class="col col-25"> 
-                                <label class="checkbox checkbox-dark"> 
+                                <label class="checkbox checkbox-dark checkbox-square"> 
                                  <input type="checkbox"  checklist-model="checkboxes.prodid" 
                             checklist-value="products[$index+1].product_id" checklist-change="checkBoxClicked([$index+1])" >
                                 <!--<input type="checkbox"  ng-model="products[$index+1].checked" 

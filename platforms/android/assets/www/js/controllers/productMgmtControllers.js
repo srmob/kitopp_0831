@@ -8,18 +8,9 @@
         $scope.onlyNumbers = /^[1-9]+[0-9]*/;
         $scope.decimalNumbers = /^\d{0,9}(\.\d{1,9})?$/;
         
-        //$scope.imgURI = "";
-        
-        
         $scope.userId = commonAppService.getloggedInUserId();
-        console.log("user id is "+JSON.stringify($scope.userId));
         $scope.productImageUrl =ApiEndpoint+"/product/productImage/productId/";
         
-         $ionicPlatform.ready(function() {
-            //$scope.images = FileService.images();
-           // $scope.$apply();
-        });
-       
         $scope.urlForImage = function(imageName) {
             var trueOrigin = cordova.file.dataDirectory + imageName;
             return trueOrigin;
@@ -40,22 +31,9 @@
         }
         $scope.addImage = function(type) {
             $scope.hideSheet();
-            /*ImageService.handleMediaDialog(type).then(function(imageURL) {
-                console.log("Image URL in controller is "+imageURL);
-                $scope.product.product_img_id1 = imageURL;
-                $scope.imageURI = imageURL;
-                console.log("Image URL in controller from image URI is "+$scope.imageURI);
-                $scope.$apply();
-            });*/
             $timeout(function(){
                 ImageService.handleMediaDialog(type).then(function(imageURL) {
-                    console.log("Image URL in example controller is "+imageURL);
-                     //$scope.imgURI = "data:image/jpeg;base64," + imageURL;
-                     //$scope.imgURI = "data:image/jpeg;base64," +imageURL;
-                     $scope.imgURI = imageURL;
-                    //$scope.imageURI = imageURL;
-                    console.log("Image URL in controller from image URI is "+$scope.imgURI);
-                    //$scope.$apply();
+                    $scope.imgURI = imageURL;
                 });
             });
         }
@@ -66,33 +44,21 @@
             $scope.productFlag="edit";
         };
         $scope.clearSearch = function(){
-            console.log("clear search invoked for "+$scope.searchProduct);
             $scope.searchProduct='';
         };
         
         $scope.addProduct = function(){
-            console.log("Product in add product is "+JSON.stringify($scope.product));
-            
-            //$scope.product.product_img_id1 = $scope.imageURI;
-            
-            console.log("Image URI is " +$scope.imageURI);
-            console.log(" Product Image ID 1 is " +$scope.product.product_img_id1);
-            
             var imageStringB64 =  base64.encode($scope.imgURI);
             
             var saveProductToDB ="product[product_img_id1]="+imageStringB64+"&product[product_catg_id]="+$scope.product.product_catg_id+"&product[product_sub_catg_id]="+$scope.product.product_sub_catg_id+"&product[product_name]="+$scope.product.name+"&product[product_desc]="+$scope.product.desc+"&product[product_mfc_name]="+$scope.product.mfrName+"&product[product_min_qty]="+$scope.product.minQty+"&product[plan][1]="+$scope.product.price_platinum+"&product[plan][2]="+$scope.product.price_gold+"&product[plan][3]="+$scope.product.price_silver;
             
-            console.log("Product Details to be added " + saveProductToDB);
-            
             ManageProduct.addSellerProduct($scope.userId,saveProductToDB).then(function(result){
-                console.log("Product for sellerID - "+$scope.userId+" - are - "+JSON.stringify(result));
-                if (result == 200) {
+               if (result == 200) {
                     $scope.alertProductAdd();
                 }else{
                     $scope.alertProductAdd_error();
                 }
-               //$scope.products  = result;
-                //alert("http://localhost:8888/kitaki/product/productImage/productId/"+$scope.products[0].product_id);
+               
             });
         }
         
@@ -102,8 +68,7 @@
                  template: 'Thank YOU!'
                });
                alertPopup.then(function(res) {
-                 console.log('Alert confirmed ');
-                   $scope.getProductsForSeller();
+                 $scope.getProductsForSeller();
                  $scope.productFlag = "0";
                  $state.go('app.seller.manageProduct');
                });
@@ -120,21 +85,14 @@
                });
         };
         $scope.editProduct = function(){
-            console.log("Product Edit "+JSON.stringify($scope.product));
+            //console.log("Product Edit "+JSON.stringify($scope.product));
         }
         $scope.resetProduct = function(){
             $scope.product = {};
-            
             $state.go('app.seller.manageProduct');
-            console.log("Product cleared"+JSON.stringify($scope.product));
+            
         }
-        //$scope.resetProduct();
-        
-        
-        /*$scope.resetProduct = function(){
-            $scope.product = {};
-            console.log("Product"+JSON.stringify($scope.product));
-        }*/
+    
         
         // Populate the drop down list for category and related subcategories
         $scope.getAllProductCategories = function() {
@@ -147,12 +105,9 @@
         
         $scope.getProductsForSeller = function(){
             ManageProduct.getSellersProducts($scope.userId).then(function(results){
-                console.log("Products for sellerID - "+$scope.userId+" - are - "+JSON.stringify(results));
                 $scope.products  = results;
-                //alert("http://localhost:8888/kitaki/product/productImage/productId/"+$scope.products[0].product_id);
+                
             });
-             
-           /* $scope.products=[{product_name:"a", product_id:1},{product_name:"b", product_id:2},{product_name:"c", product_id:3},{product_name:"d", product_id:4},{product_name:"e", product_id:5},{product_name:"g", product_id:6},{product_name:"h", product_id:7},{product_name:"i", product_id:8}];*/
         }
         $timeout($scope.getProductsForSeller(),1000);
         //$scope.getProductsForSeller();
@@ -163,18 +118,6 @@
             $state.go("app.seller.manageProduct.edit",{productId:product_id,sellerId:$scope.userId});
         }
         
-        /*$scope.editProductDetails = function(product_id){
-            console.log("Edit product id  in edit(): "+product_id+"-for seller id-"+$scope.userId);
-            if (! product_id == 0 || product_id == 'undefined' || product_id == null ) {
-                productInfo.getProductDetailsForEdit(product_id).then(function(results){
-                console.log("Product# for Edit - "+product_id+" - is - "+JSON.stringify(results.data));
-                $scope.editProduct  = results.data;
-                $state.go("app.seller.manageProductEdit",{productId:product_id,sellerId:$scope.userId,reload: false});
-                console.log("Product# for Editing - "+product_id+" - is - "+JSON.stringify($scope.editProduct));
-            });
-            }
-        }
-        $scope.editProductDetails();*/
         
         $scope.takePicture = function() {
             var options = { 
@@ -196,36 +139,7 @@
                 // An error occured. Show a message to the user
                  console.log(" *** Error in camera function--->"+err);
             });
-            
-            /*console.log('Getting camera');
-            Camera.getPicture({
-              quality: 75,
-              targetWidth: 100,
-              targetHeight: 100,
-              saveToPhotoAlbum: true
-            }).then(function(imageURI) {
-              console.log(imageURI);
-              $scope.lastPhoto = imageURI;
-            }, function(err) {
-              console.err(err);
-            });*/
         };
-        
-        /*$scope.getLibPicture = function(){
-            console.log(" &&&&& Image from Library is--->"+imageData);
-            navigator.camera.getPicture(onSuccess, onFail, { quality: 95,
-                destinationType: Camera.DestinationType.PHOTOLIBRARY;
-            });
-        }
-        
-        function onSuccess(imageData) {
-            var image = document.getElementById('myImage');
-            image.src = "data:image/jpeg;base64," + imageData;
-        }
-
-        function onFail(message) {
-            alert('Failed because: ' + message);
-        }*/
     
     };
     
@@ -242,7 +156,7 @@
         
         $scope.resetProduct = function(){
             $scope.product = {};
-            console.log("Product"+JSON.stringify($scope.product));
+            //console.log("Product"+JSON.stringify($scope.product));
         }
         
         // Populate the drop down list for category and related subcategories
@@ -285,24 +199,16 @@
             product_id = $stateParams.productId;
             console.log("Edit product id  in edit(): "+product_id+"-for seller id-"+$scope.userId);
             ManageProduct.getProductDetailsForEdit(product_id).then(function(results){
-                console.log("Product# for Edit - "+product_id+" - is - "+JSON.stringify(results.data));
-                
-                //price":[{"category_id":3,"category_name":"silver","product_price":1100}]
                 var prices =results.data.price;
-                console.log("Prices  is "+JSON.stringify(prices));
-                 //var price_category = [{"category_id":1,"category_name":"platinum","product_price":null},{"category_id":2,"category_name":"gold","product_price":null},{"category_id":3,"category_name":"silver","product_price":null},{"category_id":4,"category_name":"normal","product_price":null}];
-                //angular.merge(price_category,prices);
-                console.log("merged prices  is "+JSON.stringify(price_category));
                 if(prices.length < 4 ) {
                     var price_category = {1:"platinum", 2:"gold", 3:"silver", 4:"normal"};
                     for(var i=1 ; i <= 4 ; i++ ){
                         var flag = false;
                         angular.forEach(prices,function(val,key){
-                               console.log("value is "+JSON.stringify(val));
-                               if(val.category_id == i){
+                            if(val.category_id == i){
                                   flag = true;
-                               }
-                           })
+                            }
+                        })
                         if (!flag) {
                             prices.push({
                             category_id: i,
@@ -310,30 +216,20 @@
                             product_price: ""
                         });
                         }
-                        
                     }
-                   
-                    console.log("Prices  after is "+JSON.stringify(prices));
                 }
                 $scope.product  = results.data;
             });
         }
         $scope.editProductDetails();
-        console.log("Product# for Editing1 - is - "+JSON.stringify($scope.product));
         //$scope.product= productDetails;
         $scope.productImageUrl =ApiEndpoint+"/product/productImage/productId/";
+         
         $scope.editProduct = function(product){
-            
-            /* 
-            */
             product_id = $stateParams.productId;
             
             var price_platinum, price_gold, price_silver;
             angular.forEach($scope.product.price,function(value,key){
-                 console.log("value is "+value.category_id);           
-                 console.log("value is "+value.product_price);           
-                 console.log("key is "+key);  
-                
                 if(value.category_id == 1 ) {
                     price_platinum = value.product_price;
                 }else if(value.category_id == 2 ) {
@@ -344,19 +240,9 @@
                             
             });
             var imageStringB64 =  base64.encode($scope.imgURI);
-            /*if($scope.imgURI == null || $scope.imgURI == 'undefined') {
-                imageStringB64 =  base64.encode($scope.productImageUrl);
-            }else {
-                imageStringB64 =  base64.encode($scope.imgURI);
-            }*/
-            
             var updateProductDetails ="product[product_img_id1]="+imageStringB64+"&product[product_catg_id]="+$scope.product.product_catg_id+"&product[product_sub_catg_id]="+$scope.product.product_sub_catg_id+"&product[product_name]="+$scope.product.product_name+"&product[product_desc]="+$scope.product.product_desc+"&product[product_mfc_name]="+$scope.product.product_mfc_name+"&product[product_min_qty]="+$scope.product.product_min_qty+"&product[plan][1]="+price_platinum+"&product[plan][2]="+price_gold+"&product[plan][3]="+price_silver;
             
-            console.log("Product Edit "+JSON.stringify($scope.product));
-            console.log("Product Edit URL parameter"+updateProductDetails);
             ManageProduct.updateProductDetails(product_id,updateProductDetails,$scope.userId).then(function(results){
-                console.log("Product# for Edit - "+product_id+" - is - "+JSON.stringify(results.data));
-                //$scope.product  = results.data;
                 if (results.status == 200) {
                     $scope.alertProductEdit();
                 }
@@ -369,7 +255,6 @@
                  template: 'Thank YOU!'
                });
                alertPopup.then(function(res) {
-                 console.log('Alert confirmed ');
                  $scope.productFlag = "0";
                  $state.go('app.seller.manageProduct');
                });

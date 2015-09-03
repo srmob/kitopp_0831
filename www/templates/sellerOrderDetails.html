@@ -3,12 +3,18 @@
      <div class="bar bar-subheader bar-energized">
         <span class="label icon icon-left ion-ios-cart">Buyer: {{orderDetails[0].shop_name}}</span>
         <br>
-        <span ng-show="!orderStatus" class="label">
-            <span ng-show="orderDetails[0].order_status == 'closed'" class="label dark">
-                {{orderDetails[0].order_status}} order<i class="icon ion-information-circled dark"></i>
+        <span  class="label"> <!-- Defect #36 fix ng-show="!orderStatus"-->
+            <span ng-show="orderDetails[0].order_status == 'closed'" class="label icon ion-information-circled dark">
+                {{orderDetails[0].order_status}} order<!--<i class="icon ion-information-circled dark"></i>-->
             </span>
-            <span ng-show="orderDetails[0].order_status == 'confirmed'" class="label balanced">
-                {{orderDetails[0].order_status}} order<i class="icon ion-checkmark-circled balanced"></i>
+            <span ng-show="orderDetails[0].order_status == 'confirmed'" class="label icon ion-flag balanced">
+                {{orderDetails[0].order_status}} order<!--<i class="icon ion-checkmark-circled balanced"></i>-->
+             </span>
+            <span ng-show="orderDetails[0].order_status == 'new'" class="label icon ion-flag positive">
+                {{orderDetails[0].order_status}} order<!--<i class="icon ion-flag positive" ></i>-->
+             </span>
+            <span ng-show="orderDetails[0].order_status == 'partial'" class="label icon ion-flag assertive">
+                {{orderDetails[0].order_status}} order<!--<i class="icon ion-checkmark-circled assertive"></i>-->
              </span>
         </span>
     </div>
@@ -18,7 +24,7 @@
                     <div class="list" ng-repeat="row in orderItemDetails" ng-form="rowOrderForm" name="rowOrderForm"> 
                         <div class="item  item-avatar-right item-clear">
                             <img  ng-src="{{productImageUrl}}{{row.product_id}}/index/0"> 
-                            <label class="checkbox checkbox-dark" ng-if="orderStatus"> 
+                            <label class="checkbox checkbox-dark checkbox-square" ng-if="orderStatus"> 
                                 <!--<input type="checkbox" ng-model="row.checked" ng-checked="{{row.checked}}" ng-change="updateCheckFlag(row.checked)">-->
                                 <input type="checkbox" checklist-model="orderChkbox.item_id" 
                                 checklist-value="row.item_id" checklist-change="OrderedItemCheckBoxClicked($index,row)"> <!--checklist-change="OrderedItemCheckBoxClicked([$index])"-->

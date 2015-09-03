@@ -59,59 +59,17 @@
             self.processResultSethttp = function(result) {
                 var output = [];
                 var serverValues = angular.fromJson(result);
-//                console.log("Server Values returned in DB HTTP call is "+serverValues);
-//                console.log("Server Values returned in DB HTTP call is1- "+JSON.stringify(serverValues));
-                //Object.keys(serverValues.data).length
-                //console.log(" Service(DBA); function(processResultSethttp); result length  "+Object.keys(serverValues.data).length);
-                //console.log(" Service(DBA); function(processResultSethttp); result  "+JSON.stringify(serverValues.data));
                 for (var i = 0; i < Object.keys(serverValues.data).length; i++) {
                     output.push(serverValues.data[i]);
                 }
-                /*for (var i = 0; i < serverValues.length; i++) {
-                    output.push(serverValues[i]);
-                }*/
-
-                //console.log(" Service(DBA); function(processResultSethttp); output= "+JSON.stringify(output));
                 return output;
             }
+            
           self.processOrderDetailsResultSethttp = function(result) {
             var output = [];
-             
               var serverValues = angular.fromJson(result);
-              //Object.keys(serverValues.data).length
-                /*console.log(" length-data "+Object.keys(serverValues.data).length);
-                console.log(" length-data.items  "+Object.keys(serverValues.data.items).length);
-                console.log(" length-buyer.items  "+Object.keys(serverValues.data.buyer).length);
-              
-                console.log(" data result-  "+JSON.stringify(serverValues.data));
-                console.log(" data.items result-  "+JSON.stringify(serverValues.data.items));
-                console.log(" data.buyer result-  "+JSON.stringify(serverValues.data.buyer));*/
-              
-                //output.push(serverValues.data.buyer);
-                output.push(Object(serverValues.data));
-              
-                /*for (var i = 0; i < Object.keys(serverValues.data.items).length; i++) {
-                //output.push(result.rows.item(i));
-                    output.push("items:"+serverValues.data.items[i]);
-                  //console.log("Date of i ="+i+"-"+Object.keys(serverValues.data[i]));
-                  console.log("Data.items of i ="+i+"-"+JSON.stringify(serverValues.data.items[i]));
-                }*/
-                //output.concat(serverValues.data.buyer);
-                /*for (var i = 0; i < Object.keys(serverValues.data.buyer).length; i++) {
-                //output.push(result.rows.item(i));
-                   output.push(serverValues.data.buyer);
-                  //console.log("Date of i ="+i+"-"+Object.keys(serverValues.data[i]));
-                  console.log("Data.buyer of i ="+i+"-"+JSON.stringify(serverValues.data.buyer[i]));
-                }*/
-               /* var buyer = Object.keys(serverValues.data).shift;
-               console.log(" buyer output= "+JSON.stringify(buyer));*/
-              /*console.log(" Service(DBA); function(processOrderDetailsResultSethttp); result  "+JSON.stringify(serverValues.data.items));
-            for (var i = 0; i < Object.keys(serverValues.data.items).length; i++) {
-                //output.push(result.rows.item(i));
-                output.push(serverValues.data[i]);
-            }*/
-             //console.log(" Process Order DBA result output= "+JSON.stringify(output));
-            return output;
+              output.push(Object(serverValues.data));
+              return output;
           }
           
           return self;
@@ -165,16 +123,7 @@
             },
             getToken: function(key, defaultValue) {
                 return $window.localStorage[key] || defaultValue;
-            }/*,
-            setOrderDetails: function( value) {
-                console.log("Order details sed as"+JSON.stringify(value));
-                orderDetails = value;
-                return orderDetails;
-            },
-            getOrderDetails: function() {
-                console.log("Order details get as"+JSON.stringify(orderDetails));
-                return orderDetails;
-            }*/
+            }
         };
     }
     kitApp.service('commonAppService',appServices);

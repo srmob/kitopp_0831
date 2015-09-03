@@ -5,12 +5,8 @@
 
           self.getAllProdCatg = function(sellerID) {
             var parameters= [sellerID];
-            //console.log("In get app prod catg = seller id =>"+sellerID);
-            //return DBA.query("select uid_seller,product_catg_id,product_sub_catg_id,product_catg_name,product_sub_catg_name from product_category where uid_seller=(?) order by product_catg_id,product_sub_catg_id;" , parameters)
-              return $http.get(ApiEndpoint + '/product/fetchProductCategory/sellerId/'+sellerID)
+            return $http.get(ApiEndpoint + '/product/fetchProductCategory/sellerId/'+sellerID)
               .then(function(result){
-                //console.log(" Service(ProductInfo); function(funcGetAllProdCategories); "+ result.rows.length);
-                //return DBA.processResultSet(result);
                 return DBA.processResultSethttp(result);
               },function(error) {
                     console.log("Error in DBA-> Service(ProductInfo); function(funcGetAllProdCategories); "+error.message);
@@ -19,8 +15,6 @@
           
           self.getProductsListsForSellerID = function(sellerID,prodCatgID,subProdCatgId,buyerId) {
             var parameters= [sellerID,prodCatgID,subProdCatgId];
-            console.log("In get products for category=>"+sellerID+"-"+prodCatgID+"-"+subProdCatgId+"-"+buyerId);
-            //return DBA.query("select  pd.product_id,pd.product_catg_id,product_sub_catg_id,pd.product_name,product_desc,product_min_qty,product_price,pd.price_id ,pd.product_exp_date, pd.product_color,pd.product_weight , pd.product_height from product_details  pd , price_detail prd where pd.uid_seller=(?) and pd.product_catg_id = (?) and pd.product_sub_catg_id=(?) and pd.product_id  = prd.product_id and pd.price_id  = prd.price_id;" , parameters)
             return $http.get(ApiEndpoint + '/product/fetchProducts/seller/'+sellerID+"/category/"+prodCatgID+"/subCategory/"+subProdCatgId+"/buyerId/"+buyerId)
               .then(function(result){
                 return DBA.processResultSethttp(result);
@@ -49,7 +43,6 @@
           
           self.getOrders = function(buyerId) {
             var parameters= [buyerId];
-            //console.log(" Service(ProductInfo); function(getOrders);"+buyerId);
             return DBA.query(" select order_id,product_id,product_name,product_desc,order_qty,product_lot_size,product_sub_catg_name, order_price from order_details_temp od where  uid_buyer=(?) order by od.order_id" , parameters)
               .then(function(result){
                 //console.log(" Service(ProductInfo); function(getOrders); "+ result.rows.length);

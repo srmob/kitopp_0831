@@ -151,6 +151,7 @@
         $scope.onlyNumbers = /^[1-9]+[0-9]*/;
         $scope.imgURI="";
          
+         console.log(" Image URI in edit prod controller is : "+$scope.imgURI);
         
         $scope.userId = commonAppService.getloggedInUserId();
         
@@ -197,9 +198,10 @@
         
         $scope.editProductDetails = function(){
             product_id = $stateParams.productId;
-            console.log("Edit product id  in edit(): "+product_id+"-for seller id-"+$scope.userId);
+            
             ManageProduct.getProductDetailsForEdit(product_id).then(function(results){
                 var prices =results.data.price;
+                console.log("Edit product id  in edit(): "+product_id+"-for seller id-"+$scope.userId+"- and details are :-"+JSON.stringify(results));
                 if(prices.length < 4 ) {
                     var price_category = {1:"platinum", 2:"gold", 3:"silver", 4:"normal"};
                     for(var i=1 ; i <= 4 ; i++ ){

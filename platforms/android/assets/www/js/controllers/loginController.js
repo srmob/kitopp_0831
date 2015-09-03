@@ -2,31 +2,7 @@
    var funcUserLogin = function($scope,$state, $stateParams,$timeout,LoginInfo,$ionicPopup,commonAppService,$ionicLoading,base64){
         
        
-       /*var imeiId1 = "83265647bff10fb5";
-       commonAppService.setDeviceId(imeiId1);*/
-       //var imeiId1 = "";
-       //83265647bff10fb5
-       /*ionic.Platform.ready(function(){
-           console.log("Device Ready in ionic platform ");
-            // will execute when device is ready, or immediately if the device is already ready.
-            /*imeiId1 = ionic.Platform.device().uuid;
-            commonAppService.setDeviceId(imeiId1);*/
-            //console.log("Device ID set in ionic platform during login "+imeiId1);
-            //console.log("In Phone Number screen");
-            /*var telephoneNumber = cordova.require("cordova/plugin/telephonenumber");
-            telephoneNumber.get(function(result) {
-                 console.log("result = " + result);
-                 console.log("simSerialNumber = " + result.simSerialNumber); // number sim 
-                 console.log("line1Number = " + result.line1Number); // telephone number (if insert sim)
-                 console.log("full = " + JSON.stringify(result)); // telephone number (if insert sim)
-                 alert(result.line1Number);
-                 commonAppService.setloggedInUserPhoneNum(result.line1Number);
-            }, function() {
-                console.log("error");
-                alert(error);
-            });
-            
-        });*/
+       
         var pushNotification;
         /*ionic.Platform.ready(function(){
            pushNotification = window.plugins.pushNotification;
@@ -113,17 +89,14 @@
        $scope.passcode = "";
         var retryCount = 0 ;
        $scope.loginUser = function() {
-            console.log("User Login starts");
             $state.go('login');
             
         }
         $scope.doLogin = function() {
-            console.log("User dologin");
             $state.go('dologin');
             
         }
         $scope.loginUser1 = function() {
-            console.log("User Login 1 starts");
             $state.go('login1');
             
         }
@@ -134,18 +107,10 @@
             $scope.passcode = $scope.passcode + value;
             if($scope.passcode.length == 4) {
                 $timeout(function() {
-                    console.log("The four digit code was entered+imei-pass"+commonAppService.getDeviceId()+"-"+$scope.passcode);
                     var passwordEntered = base64.encode($scope.passcode);
-                    //console.log("Base 64 equivalent of passcode is-> "+passwordEntered);
                     var urlSafeBase64EncodedString = encodeURIComponent(passwordEntered);
-                     console.log(" URL Safe Base 64 equivalent of passcode is-> "+urlSafeBase64EncodedString);
-                    
-                    /*var base64EncodedString = decodeURIComponent(urlSafeBase64EncodedString);
-                    console.log(" URL Safe decoded Base 64 equivalent of passcode is-> "+base64EncodedString);
-                    var decodedString = $base64.decode(base64EncodedString);*/
-                    LoginInfo.verifyLoggedInUser(commonAppService.getDeviceId(),urlSafeBase64EncodedString).then(function(loginResult){
-                       //console.log("loginResult:- "+loginResult);
-                          //Valid User
+                     LoginInfo.verifyLoggedInUser(commonAppService.getDeviceId(),urlSafeBase64EncodedString).then(function(loginResult){
+                       //Valid User
                         if(loginResult){
                              //console.log("loginResult 1 :- "+loginResult);
                             if (commonAppService.getloggedInUserType() == 'buyer') {
@@ -156,26 +121,7 @@
                                 $timeout($state.go('app.seller'),1000);
                             }
                         }
-                        /*if (loginDetails.length != 0 && loginDetails.length == 1 ) {
-                            uid = loginDetails[0].uid;
-                            //loggedInUserId = uid;
-                            commonAppService.setloggedInUserId(uid);
-                            console.log(" Logged in UID:"+uid);
-                            if (uid != 0 ){
-                                console.log("Within IF-"+uid);
-                                LoginInfo.getLoggedInUserInfo(uid).then(function(user){
-                                    $scope.userDetails = user;
-                                    loggedInUserType = user[0].user_type;
-                                    commonAppService.setloggedInUserType(loggedInUserType);
-                                     console.log("loggedInUserType-UID:"+loggedInUserType+"-"+loggedInUserId);
-                                    if (loggedInUserType == 'Buyer') {
-                                        $state.go('app.buyer');
-                                    }if (loggedInUserType == 'Seller' || loggedInUserType == 'Both' ) {
-                                        $state.go('app.seller');
-                                    }
-                                });
-                            }
-                        }*/ else { 
+                        else { 
                               //Invalid user
                             retryCount++;
                             console.log("Retry Count is:"+retryCount);
@@ -216,36 +162,15 @@
          };
        
        $scope.register = function(){
-           console.log("In register screen");
-           $state.go('register');
-           
+            $state.go('register');
        }
-       /*$scope.phoneNumber = function(){
-           console.log("In Phone Number screen");
-            var telephoneNumber = cordova.require("cordova/plugin/telephonenumber");
-            telephoneNumber.get(function(result) {
-                 console.log("result = " + result);
-                 console.log("simSerialNumber = " + result.simSerialNumber); // number sim 
-                 console.log("line1Number = " + result.line1Number); // telephone number (if insert sim)
-                 console.log("full = " + JSON.stringify(result)); // telephone number (if insert sim)
-                 alert(result.line1Number);
-            }, function() {
-                console.log("error");
-                alert(error);
-            });
-
-       }*/
-       
+    
        $scope.logout = function(){
            console.log("Exit the app..");
-           //navigator.app.exitApp()
            if (navigator.app) {
-                alert("app");
-                /*navigator.app.exitApp();*/
-               LoginInfo.userLogout();
-               ionic.Platform.exitApp();
+                LoginInfo.userLogout();
+                ionic.Platform.exitApp();
             }else if (navigator.device) {
-                alert("device");
                 navigator.device.exitApp();
             }
        }
