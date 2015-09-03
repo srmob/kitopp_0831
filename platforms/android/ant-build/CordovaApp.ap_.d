@@ -478,6 +478,7 @@
 /Shashi-data/sriganesh/gitcode/kitopp_0831/platforms/android/assets/www/plugins/org.apache.cordova.splashscreen/www/splashscreen.js \
 /Shashi-data/sriganesh/gitcode/kitopp_0831/platforms/android/assets/www/templates/about.html \
 /Shashi-data/sriganesh/gitcode/kitopp_0831/platforms/android/assets/www/templates/browse.html \
+/Shashi-data/sriganesh/gitcode/kitopp_0831/platforms/android/assets/www/templates/buyerCategory.html \
 /Shashi-data/sriganesh/gitcode/kitopp_0831/platforms/android/assets/www/templates/buyerInfo.html \
 /Shashi-data/sriganesh/gitcode/kitopp_0831/platforms/android/assets/www/templates/buyerOrders.html \
 /Shashi-data/sriganesh/gitcode/kitopp_0831/platforms/android/assets/www/templates/buyOrderSummary.html \

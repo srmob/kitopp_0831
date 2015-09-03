@@ -42,10 +42,10 @@ var kitApp = angular.module('starter', ['ionic','ui.unique','checklist-model','n
         }
         
         // Set the Device ID to Common App Service
-        /*var deviceID = device.uuid;
-        commonAppService.setDeviceId(device.uuid);*/
+        var deviceID = device.uuid;
+        commonAppService.setDeviceId(device.uuid);
         //commonAppService.setDeviceId("83265647bff10fb5");
-        commonAppService.setDeviceId("a9f990dae1bff6da"); //seller
+        //commonAppService.setDeviceId("a9f990dae1bff6da"); //seller
         //commonAppService.setDeviceId("1a998ca53dbe55b2"); //- buyer
         console.log("Device ID....... "+commonAppService.getDeviceId());
         

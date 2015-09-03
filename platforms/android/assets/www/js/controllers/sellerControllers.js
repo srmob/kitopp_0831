@@ -28,6 +28,7 @@
                    });
                    $scope.orderItemDetails = value.items;
                 });
+                //Fixed Defect 36
                 $scope.orderStatus  = true;
                 if (details[0].order_status == 'closed' || details[0].order_status == 'confirmed' ) {
                     $scope.orderStatus = false;
@@ -47,7 +48,7 @@
         //Function to update the flag value, if user has selected any of items in Screen 9
         $scope.updateCheckFlag = function(flag) {
             $scope.checkStatus = flag; 
-            console.log("Order Details in Screen 9 checked flag"+$scope.checkStatus);
+            //console.log("Order Details in Screen 9 checked flag"+$scope.checkStatus);
         };
         //Click of process button on Seller Order Details
         $scope.processOrder = function(orderId){
@@ -168,8 +169,17 @@
     }
     kitApp.controller('SellerOrderConfCtrl',funcSellerOrderConf) ;
     
-    var funcCustMgmt = function($scope,$stateParams,SellerInfo){
-        $scope.buyersList = [{"name":"A",id:1},{"name":"B",id:2},{"name":"C",id:3}];
+    var funcCustMgmt = function($scope,$stateParams,SellerInfo,commonAppService){
+        
+        $scope.userId = commonAppService.getloggedInUserId();
+        $scope.userType = commonAppService.getloggedInUserType();
+       
+        $scope.getUserPlans = function(){
+           $scope.userPlans=[{"id":1,"name":"platinum"},{"id":2,"name":"gold"},{"id":3,"name":"silver"}];
+        }
+        $scope.getUserPlans();
+        
+        $scope.buyersList = [{"name":"Shirdi Enterprises ltd",id:1,checked:true},{"name":"Boeing corporation",id:2,checked:true},{"name":"Checkmark India",id:3,checked:false}];
         
     };
     kitApp.controller('sellerCustomerMgmtCtrl',funcCustMgmt) ;

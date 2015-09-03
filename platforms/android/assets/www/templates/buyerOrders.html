@@ -27,7 +27,7 @@
                     <span class="col  ol-40 col-right"> <label class="subdued dark">{{ value |toArray:true| map:'order_tot_amount' | sum  | currency:"&#8377;" : 0 }}</label></span>
                  </div>
                 <div class="list" >
-                   <d`iv  ng-repeat="item in value | orderBy:'order_id' | reverse" class="row item" ng-class-odd="'odd'" ng-class-even="'even'"> 
+                   <div  ng-repeat="item in value | orderBy:'order_id' | reverse" class="row item" ng-class-odd="'odd'" ng-class-even="'even'"> 
                    
                        <div class="col col-20 item-text-wrap"><label class="subdued">{{item.order_id}}</label></div>
                      

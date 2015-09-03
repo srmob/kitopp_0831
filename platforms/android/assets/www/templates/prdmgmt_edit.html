@@ -4,12 +4,12 @@
         <ion-content>
             <!--{{product}} - {{userId}}-->
            <!-- {{productCatg}} - {{userId}}-->
-            <div class="list list-inset">
+            <div class="list list-inset"> IMG  is {{imgURI}}
              <label id = "" class="item item-input">
                 <span class="input-label">Product Image</span>
                 <img ng-show="imgURI !== undefined" ng-src="{{productImageUrl}}{{product.product_id}}/index/0">
                 <!--<img ng-src="{{imageURI}}" ng-show="imgURI !== undefined" ng-model="product.product_img_id1">-->
-                <img ng-show="imgURI === undefined" ng-src="http://placehold.it/70x50">
+                <img ng-show="imgURI === null" ng-src="http://placehold.it/70x50">
                 <img ng-show="imgURI !== null" ng-src="{{imgURI}}">
                 <button class="button button-small button-outline  button-assertive"ng-click="addMedia()">
                         <i class="icon ion-ios-camera-outline"></i>
@@ -27,11 +27,11 @@
               <label id = ""class="item item-input">
                 <span class="input-label">Description</span>
                 <input type="text" placeholder="Description.." ng-model="product.product_desc" value="product.product_desc">
-              </label>{{product.product_catg_id}}
+              </label><!--{{product.product_catg_id}}-{{product.product_sub_catg_id}}-->
               <label id = "" class="item item-input">
                     <span class="input-label">Category</span>
                 <!--<input type="text" placeholder="category" ng-model="product.product_catg" >-->
-                    <select ng-options="dept.product_catg_id as dept.product_catg_name for dept in productCatg | unique:'product_catg_name' | orderBy:'product_catg_name'" ng-model="product.product_catg_id"
+                    <select ng-options="dept.product_catg_id as dept.product_catg_name for dept in productCatg | unique:'product_catg_id' | orderBy:'product_catg_name'" ng-model="product.product_catg_id"
                           class="item item-select item-calm">
                           <!--<option ng-value="{{dept.product_catg_id}}" default selected>{{product.product_catg_name}}</option>-->
                   </select>
@@ -43,7 +43,7 @@
                 <!--<input type="text" placeholder="subcategory" ng-model="product.subcatg">-->
                 <label class="select select-assertive">
                   <select ng-model="product.product_sub_catg_id" 
-                          ng-options="dept.product_sub_catg_id as dept.product_sub_catg_name for dept in productCatg | unique:'product_sub_catg_name' | orderBy:'product_sub_catg_name' | filter:product.product_catg_id"
+                          ng-options="dept.product_sub_catg_id as dept.product_sub_catg_name for dept in productCatg| orderBy:'product_sub_catg_name' | filter:product.product_catg_id"
                           class="item item-select item-calm">
                           <!--<option value="" disabled default selected>{{product.product_sub_catg_name}}</option>-->
                   </select>

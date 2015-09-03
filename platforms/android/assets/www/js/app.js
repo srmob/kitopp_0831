@@ -317,7 +317,7 @@ var kitApp = angular.module('starter', ['ionic','ui.unique','checklist-model','n
         url: "/customerMgmt",
         views: {
             'menuContent@app': {
-              templateUrl: "templates/customerMgmt.html",
+              templateUrl: "templates/buyerCategory.html",
               controller: 'sellerCustomerMgmtCtrl'
             }
         }

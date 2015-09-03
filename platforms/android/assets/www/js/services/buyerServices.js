@@ -96,10 +96,10 @@
         
         self.getBuyerOrders = function(buyerId) {
             var parameters= [buyerId];
-            console.log(" Service(OrderInfo); function(getBuyerOrders);"+buyerId+"-API-= "+ApiEndpoint);
+           // console.log(" Service(OrderInfo); function(getBuyerOrders);"+buyerId+"-API-= "+ApiEndpoint);
               return $http.get(ApiEndpoint + '/order/fetchOrderForBuyer/buyerId/'+buyerId)
               .then(function(result){
-                //console.log(" Service(SellerInfo); function(getSellerOrders); "+ result.rows.length);
+                console.log(" Service(SellerInfo); function(getSellerOrders); "+ JSON.stringify(result));
                 return DBA.processResultSethttp(result);
               },function(error) {
                     console.log("Error in DBA-> Service(OrderInfo); function(getBuyerOrders); "+error.message);
