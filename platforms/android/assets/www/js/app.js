@@ -21,7 +21,7 @@ var kitApp = angular.module('starter', ['ionic','ui.unique','checklist-model','n
 //.constant('ApiEndpoint','http://192.168.1.2:8083')
 //.constant('ApiEndpoint','http://117.218.228.220:8020/kitaki')
 
-.run(function($ionicPlatform,$cordovaSQLite,$rootScope,$ionicLoading,$ionicPopup,ApiEndpoint,ConnectivityMonitor,commonAppService) {
+.run(function($ionicPlatform,$cordovaSQLite,$rootScope,$ionicLoading,$ionicPopup,ApiEndpoint,ConnectivityMonitor,commonAppService,$http) {
     $rootScope.$on('loading:show', function() {
         $ionicLoading.show({template: '<ion-spinner icon="ripple ripple-energized"></ion-spinner>'})
     });
@@ -45,8 +45,8 @@ var kitApp = angular.module('starter', ['ionic','ui.unique','checklist-model','n
         /*var deviceID = device.uuid;
         commonAppService.setDeviceId(device.uuid);*/
         //commonAppService.setDeviceId("83265647bff10fb5");
-        //commonAppService.setDeviceId("8ef01a374e602841"); //seller - 1091
-        commonAppService.setDeviceId("1a998ca53dbe55b2"); //- buyer - 4524
+        commonAppService.setDeviceId("8ef01a374e602841"); //seller - 1901
+        //commonAppService.setDeviceId("1a998ca53dbe55b2"); //- buyer - 4524
         console.log("Device ID....... "+commonAppService.getDeviceId());
         
         //Fetch the phone number and set if available
@@ -319,6 +319,15 @@ var kitApp = angular.module('starter', ['ionic','ui.unique','checklist-model','n
             'menuContent@app': {
               templateUrl: "templates/buyerCategory.html",
               controller: 'sellerCustomerMgmtCtrl'
+            }
+        }
+    })
+    .state('app.seller.myShop', {
+        url: "/myshop",
+        views: {
+            'menuContent@app': {
+              templateUrl: "templates/sellershop.html",
+              controller: 'sellerShopCtrl'
             }
         }
     })

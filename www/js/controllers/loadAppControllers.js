@@ -7,6 +7,7 @@
     
     $scope.userId = commonAppService.getloggedInUserId();
     $scope.userType = commonAppService.getloggedInUserType();
+    $scope.userRoleId = commonAppService.getloggedInUserRole();
         
     //console.log("In App controller ; UID and Type =>"+$scope.userId+"-"+$scope.userType);
        
@@ -60,10 +61,12 @@
            //console.log("In AppCtrl , sdfsdf "+sellerId);
     };
     
-    if ( $scope.userType  == 'seller' && $scope.userId != null ){
+    /*if ( $scope.userType  == 'seller' && $scope.userId != null ){
         $scope.viewSellerOrders();
-    }
-        
+    }*/
+    if ( $scope.userRoleId  == 3 && $scope.userId != null ){
+        $scope.viewSellerOrders();
+    }   
     $ionicModal.fromTemplateUrl('templates/buyerInfo.html', {
         scope: $scope,
         animation: 'mh-slide'
@@ -102,7 +105,7 @@
 
         });
     };
-    if ( $scope.userType  == 'buyer' ){
+    if ( $scope.userType  == 'buyer' || $scope.userRoleId == 2  ){
         $scope.getSellersForBuyer();
     }
     

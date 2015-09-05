@@ -16,6 +16,7 @@
 
         self.getOrdersDetails = function(orderId) {
             return $http.get(ApiEndpoint + '/order/orderDetail/orderId/'+orderId).then(function(result){
+                console.log(" Service(SellerInfo); function(getOrdersDetails); "+ JSON.stringify(result));
                 return DBA.processOrderDetailsResultSethttp(result);
             },function(error) {
                 console.log("Error in DBA-> Service(SellerInfo); function(getOrdersDetails); "+error.message);

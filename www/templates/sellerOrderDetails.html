@@ -14,7 +14,8 @@
                 {{orderDetails[0].order_status}} order<!--<i class="icon ion-flag positive" ></i>-->
              </span>
             <span ng-show="orderDetails[0].order_status == 'partial'" class="label icon ion-flag assertive">
-                {{orderDetails[0].order_status}} order<!--<i class="icon ion-checkmark-circled assertive"></i>-->
+                {{orderDetails[0].order_status}} of order# <a href="#/app/sellerOrderSummary/sellerOrderDetails/{{orderDetails[0].order_ref_id}}/{{orderDetails[0].customer_id}}">{{orderDetails[0].order_ref_id}}</a>
+             <!----><!--<i class="icon ion-checkmark-circled assertive"></i>-->
              </span>
         </span>
     </div>

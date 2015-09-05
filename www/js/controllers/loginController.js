@@ -1,20 +1,31 @@
 (function(){
-   var funcUserLogin = function($scope,$state, $stateParams,$timeout,LoginInfo,$ionicPopup,commonAppService,$ionicLoading,base64){
+   var funcUserLogin = function($scope,$state, $stateParams,$timeout,LoginInfo,$ionicPopup,commonAppService,$ionicLoading,base64,$http,ApiEndpoint){
         
-       
+        $scope.bothRegistered = false;
        
         var pushNotification;
-        /*ionic.Platform.ready(function(){
+       ionic.Platform.ready(function(){
+           $http.get(ApiEndpoint + '/user/checkDevice/deviceId/'+commonAppService.getDeviceId(),{skipAuthorization: true}).then          (function(result){
+                //http://117.218.228.220:8080/kitaki/user/checkDevice/deviceId/8ef01a374e602841
+                 console.log("Device Check Status is "+JSON.stringify(result));
+                if(result.data.role_id == 3 ){
+                    $scope.bothRegistered = true;
+                }/*else if(result.data.role_id == 1 ){
+                     $scope.bothRegistered = false;
+                }*/
+            });
+       });
+        ionic.Platform.ready(function(){
            pushNotification = window.plugins.pushNotification;
             if ( device.platform == 'android' || device.platform == 'Android' ){
                 pushNotification.register(
                     successHandler,
                     errorHandler,
                     {
-                        "senderID":"981302519609",
-                        "ecb":"onNotification"       
-                        "senderID":"1088647290869",
-                        "ecb":"onNotification"
+                        "senderID":"981302519609",  // https://console.developers.google.com/project/to-prove-evolve
+                        "ecb":"onNotification",      
+                        /*"senderID":"1088647290869",
+                        "ecb":"onNotification"*/
                     });
             }
             function successHandler (result) {
@@ -82,7 +93,7 @@
               }
             }
             
-        });*/
+        });
         
        
        //$scope.phoneNum = 8121314151;
@@ -109,14 +120,23 @@
                 $timeout(function() {
                     var passwordEntered = base64.encode($scope.passcode);
                     var urlSafeBase64EncodedString = encodeURIComponent(passwordEntered);
+                    /*console.log("logging in for  is :- "+urlSafeBase64EncodedString);*/
                      LoginInfo.verifyLoggedInUser(commonAppService.getDeviceId(),urlSafeBase64EncodedString).then(function(loginResult){
+                        /*console.log("loginResult is :- "+JSON.stringify(loginResult));*/
                        //Valid User
                         if(loginResult){
                              //console.log("loginResult 1 :- "+loginResult);
-                            if (commonAppService.getloggedInUserType() == 'buyer') {
+                            /*if (commonAppService.getloggedInUserType() == 'buyer') {
                                 console.log("loginResult 2 :- "+loginResult+"-"+commonAppService.getloggedInUserType());
                                 $timeout($state.go('app.buyer'),1000);
-                            }if (commonAppService.getloggedInUserType() == 'seller' || commonAppService.getloggedInUserType() == 'both' ) { 
+                            }if (commonAppService.getLoggedInUserRole() == 'seller' || commonAppService.getloggedInUserType() == 'both' ) { 
+                                console.log("loginResult 3 :- "+loginResult+"-"+commonAppService.getloggedInUserType());
+                                $timeout($state.go('app.seller'),1000);
+                            }*/
+                            if (commonAppService.getloggedInUserRole() == 2) {
+                                console.log("loginResult 2 :- "+loginResult+"-"+commonAppService.getloggedInUserType());
+                                $timeout($state.go('app.buyer'),1000);
+                            }if (commonAppService.getloggedInUserRole() == 3 ) { 
                                 console.log("loginResult 3 :- "+loginResult+"-"+commonAppService.getloggedInUserType());
                                 $timeout($state.go('app.seller'),1000);
                             }

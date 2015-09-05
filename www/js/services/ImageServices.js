@@ -14,9 +14,9 @@ kitApp.factory('ImageService', function($cordovaCamera,  $q, $cordovaFile) {
     return {
       //destinationType: Camera.DestinationType.FILE_URI ,
       destinationType: Camera.DestinationType.DATA_URL,
-      quality : 75, 
-      targetWidth : 70,
-      targetHeight : 50, 
+      quality : 100, 
+      /*targetWidth : 70,
+      targetHeight : 50, */
       sourceType: source,
       allowEdit: true,
       saveToPhotoAlbum: true,

@@ -4,17 +4,28 @@
         </button>
         <h1 class="title">User Registration</h1>
     </div>
+    <div class="bar bar-subheader bar-clear">
+         <label class="item item-input">
+                <!--<label class="subdued positive">User Category</label>-->
+                <select ng-model="user.category" 
+                ng-options="cat.id as cat.name for cat in userCategory | orderBy: 'cat.name'"
+                ng-change="categoryCheckerGo()" class="item item-select item-positive">
+                <option value="" disabled default selected>-Select user category-</option>
+                </select>
+        </label>
+    </div>
+    
     <form name="userRegForm"  class="">
-        <ion-content class="has-header">
+        <ion-content class="has-header has-subheader">
       
-            <label class="item item-input">
+            <!--<label class="item item-input">
                 <label class="subdued positive">User Category</label>
                 <select ng-model="user.category" 
                 ng-options="cat.id as cat.name for cat in userCategory | orderBy: 'cat.name'"
                 ng-change="categoryCheckerGo()" class="item item-select item-positive">
                 <option value="" disabled default selected>-Select user category-</option>
                 </select>
-            </label>
+            </label>-->
             
            <!-- <div ng-show="user.category== 2 || user.category== 1 || user.category== 3" class="list list-inset">-->
             <div ng-show="user.category!= NULL" class="list list-inset" ng-form='buyerForm' name='buyerForm'>
@@ -22,7 +33,7 @@
                 <label class="item item-input">
                     <span class="input-label">User Pic</span>
                     <img ng-src="data:image/jpeg;base64,{{imgURI}}" ng-show="imgURI !== undefined" ng-model="user.img_id">
-                    <img ng-show="imgURI === undefined" ng-src="http://placehold.it/70x50">
+                    <img ng-show="imgURI === undefined" ng-src="data:image/jpeg;base64,{{imgURI}}/70x50">
                     <button class="button button-small button-outline  button-assertive"ng-click="addMedia()">
                             <i class="icon ion-ios-camera-outline"></i>
                     </button>
@@ -30,66 +41,69 @@
                 <label class="item item-input">
                     <span class="input-label">Shop Pic</span>
                     <img ng-src="data:image/jpeg;base64,{{imgURI_shop}}" ng-show="imgURI !== undefined" ng-model="user.img_id_shop">
-                    <img ng-show="imgURI === undefined" ng-src="http://placehold.it/70x50">
+                    <img ng-show="imgURI === undefined" ng-src="data:image/jpeg;base64,{{imgURI}}/70x50">
                     <button class="button button-small button-outline  button-assertive"ng-click="addMedia_shop()">
                             <i class="icon ion-ios-camera-outline"></i>
                     </button>
                 </label>
-                
+                <label class="item item-input" ng-class="{ 'has-error-lr' : buyerForm.sName.$invalid, 'valid-lr' : buyerForm.sName.$valid}">
+                       <!-- <span class="input-label">Shop Name</span>-->
+                        <input type="text" placeholder="Abc traders " ng-model="user.shopName" name="sName" minlength="1" maxlength="50" required>
+                </label>
                 <label class="item item-input"  ng-class="{ 'has-error-lr' : buyerForm.phoneNum.$invalid, 'valid' : buyerForm.phoneNum.$valid}">
-                    <span class="input-label">Phone #</span>
+                    <!--<span class="input-label">Phone #</span>-->
                     <input type="tel" name="phoneNum"  ng-model="user.phone" placeholder="9999999"  minlength="10" maxlength="10" required>
                 </label>
                 <label class="item item-input" ng-class="{ 'has-error-lr' : buyerForm.fName.$invalid, 'valid-lr' : buyerForm.fName.$valid}">
-                        <span class="input-label">Name</span>
+                        <!--<span class="input-label">Name</span>-->
                         <input type="text" placeholder="Mahesh" ng-model="user.firstName" name="fName" maxlength="50" required>
                 </label>
                 <label class="item item-input" ng-class="{ 'has-error-lr' : buyerForm.lName.$invalid, 'valid' : buyerForm.fName.$valid}">
-                        <span class="input-label">Last Name</span>
+                       <!-- <span class="input-label">Last Name</span>-->
                         <input type="text" placeholder="Raj" ng-model="user.lastName" name="lName" maxlength="50"  required>
                 </label>
                 
                    <label class="item item-input" ng-class="{ 'has-error-lr' : buyerForm.email.$invalid, 'valid-lr' : buyerForm.email.$valid}"> 
-                    <span class="input-label">email</span>
+                   <!-- <span class="input-label">email</span>-->
                     <input type="Email" placeholder="email@example.com" ng-model="user.email"  name="email" required>
                 </label>
             </div>
             <div ng-show="user.category == 1 || user.category == 3" class="list list-inset">
 
-                <label class="item item-input" ng-class="{ 'has-error-lr' : userRegForm.dob.$dirty && userRegForm.dob.$invalid, 'valid' : userRegForm.dob.$valid}">
+                <!--<label class="item item-input" ng-class="{ 'has-error-lr' : userRegForm.dob.$dirty && userRegForm.dob.$invalid, 'valid' : userRegForm.dob.$valid}">
                     <span class="input-label">Date of Birth</span>
                     <input type="date" ng-model="user.dob" name="dob"  required>
-                </label>
+                </label>-->
                <label  class="item item-radio" >
                     <span class="input-label"> Gender:</span> 
                     <!--<ion-radio ng-value="M" ng-model="user.gender" > Male </ion-radio>
                     <ion-radio ng-value="F" ng-model="user.gender"> Female </ion-radio>-->
-                    <ion-radio ng-value="sex.id" ng-repeat="sex in gender" ng-model="user.gender"> {{sex.value}} </ion-radio>
+                    <ion-radio ng-value="sex.id" ng-repeat="sex in gender" ng-model="user.gender" ng-checked="sex.selected"> {{sex.value}} </ion-radio>
                     
                 </label>
                 <label class="item item-input" ng-class="{ 'has-error-lr' : userRegForm.tin.$dirty && userRegForm.tin.$invalid, 'valid' : userRegForm.tin.$valid}">
-                    <span class="input-label">TIN Number</span>
-                    <input type="text" ng-model="user.tinNumber" placeholder="TIN Number" name="tin" ng-pattern="onlyNumbers" maxlength="10" required>
+                    <!--<span class="input-label">TIN Number</span>-->
+                    <input type="text" ng-model="user.tinNumber" placeholder="TIN Number" name="tin" ng-pattern="onlyNumbers" maxlength="10" >
                 </label>
                 <label class="item item-input" ng-class="{ 'has-error-lr' : userRegForm.st.$invalid, 'valid' : userRegForm.st.$valid}">
-                    <span class="input-label">ST Number</span>
-                    <input type="text" ng-model="user.stNumber" placeholder="ST Number" name="st" ng-pattern="onlyNumbers" maxlength="10" required >
+                   <!-- <span class="input-label">ST Number</span>-->
+                    <input type="text" ng-model="user.stNumber" placeholder="ST Number" name="st" ng-pattern="onlyNumbers" maxlength="10"  >
                 </label>
 
                 <label class="item item-input" ng-class="{ 'has-error-lr' : userRegForm.cst.$invalid, 'valid' : userRegForm.cst.$valid}">
-                    <span class="input-label">CST Number</span>
-                    <input type="text" ng-model="user.cstNumber" placeholder="CST Number" name="cst" ng-pattern="onlyNumbers" maxlength="10" required >
+                    <!--<span class="input-label">CST Number</span>-->
+                    <input type="text" ng-model="user.cstNumber" placeholder="CST Number" name="cst" ng-pattern="onlyNumbers" maxlength="10"  >
                 </label>
 
                 <label class="item item-input" ng-class="{ 'has-error-lr' : userRegForm.pan.$invalid, 'valid' : userRegForm.pan.$valid}">
-                    <span class="input-label">PAN Number</span>
-                    <input type="text" ng-model="user.panNumber" placeholder="PAN " name="pan" maxlength="10" required>
+                    <!--<span class="input-label">PAN Number</span>-->
+                    <input type="text" ng-model="user.panNumber" placeholder="PAN " name="pan" maxlength="10" >
                 </label>
 
-                <label class="item item-input" ng-class="{ 'has-error-lr' : userRegForm.uid.$invalid, 'valid' : userRegForm.uid.$valid}">
+                <!--<label class="item item-input" ng-class="{ 'has-error-lr' : userRegForm.uid.$invalid, 'valid' : userRegForm.uid.$valid}">
                     <span class="input-label">UID Number</span>
                     <input type="text" ng-model="user.uidNumber" placeholder="UID" name="uid" maxlength="10" required >
-                </label>
+                </label>-->
 
                 <!--<label class="item item-input">
                     <span class="input-label">Photo</span>

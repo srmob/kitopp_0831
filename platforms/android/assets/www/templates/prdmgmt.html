@@ -72,9 +72,9 @@
               
               <label id = "" class="item item-input">
                 <span class="input-label">Product Image</span>
-                <img ng-src="data:image/jpeg;base64,{{imgURI}}" ng-show="imgURI !== undefined" ng-model="product.product_img_id1">
+                <img ng-src="data:image/jpeg;base64,{{imgURI}}/120x100" ng-show="imgURI !== undefined" ng-model="product.product_img_id1">
                 <!--<img ng-src="{{imageURI}}" ng-show="imgURI !== undefined" ng-model="product.product_img_id1">-->
-                <img ng-show="imgURI === undefined" ng-src="http://placehold.it/70x50">
+                <img ng-show="imgURI === undefined" ng-src="data:image/jpeg;base64,{{imgURI}}/120x100">
                 <button class="button button-small button-outline  button-assertive"ng-click="addMedia()">
                         <i class="icon ion-ios-camera-outline"></i>
                 </button><!--<div class="spacer" style="width: 10px;"></div>
@@ -146,15 +146,15 @@
                 <span class="input-label col col-30">Product Price</span>
                     <label class="item item-input" ng-class="{ 'has-error-lr' : ProductMgmtForm.product_price_platinum.$dirty && ProductMgmtForm.product_price_platinum.$invalid, 'valid' : ProductMgmtForm.product_price_platinum.$valid}">
                         <span class="input-label">Platinum</span>
-                        <input type="number" name="ProductMgmtForm.product_price_platinum" ng-model="product.price_platinum"  placeholder="platinum" value='{{ product.price_platinum }}' min="0"  ng-pattern="decimalNumbers" step="0.01" maxlength=10 required>
+                        <input type="number" name="ProductMgmtForm.product_price_platinum" ng-model="product.price_platinum"  placeholder="price for platinum category customer" value='{{ product.price_platinum }}' min="0"  ng-pattern="decimalNumbers" step="0.01" maxlength="10" required>
                   </label>
                    <label  class="item item-input" ng-class="{ 'has-error-lr' : ProductMgmtForm.product_price_gold.$dirty && ProductMgmtForm.product_price_gold.$invalid, 'valid' : ProductMgmtForm.product_price_gold.$valid}">
                         <span class="input-label">Gold</span>
-                        <input type="number" ng-model="product.price_gold"  name="ProductMgmtForm.product_price_gold" placeholder="gold" value='{{ product.price_platinum }}' min="1" maxlength="4" ng-pattern="onlyNumbers" required>
+                        <input type="number" ng-model="product.price_gold"  name="ProductMgmtForm.product_price_gold" placeholder="price for gold category customer" value='{{ product.price_platinum }}' min="1" maxlength="10" ng-pattern="onlyNumbers" required>
                   </label>
                   <label class="item item-input" ng-class="{ 'has-error-lr' : ProductMgmtForm.product_price_silver.$dirty && ProductMgmtForm.product_price_silver.$invalid, 'valid' : ProductMgmtForm.product_price_silver.$valid}">
                         <span class="input-label" >Silver</span>
-                        <input type="number" style="border-color:red" ng-model="product.price_silver"  placeholder="silver" value='{{ product.price_platinum }}' name="ProductMgmtForm.product_price_silver" min="1" maxlength="4" ng-pattern="onlyNumbers" required>
+                        <input type="number" style="border-color:red" ng-model="product.price_silver"  placeholder="price for silver category customer" value='{{ product.price_platinum }}' name="ProductMgmtForm.product_price_silver" min="1" maxlength="10" ng-pattern="onlyNumbers" required>
                   </label>
                 <!--<input type="number" ng-model="product.price_gold" value='{{ product.price_gold }}' min="0" max="4" placeholder="Gold">
                 <input type="number" ng-model="product.price_silver"  placeholder="Silver" value='{{ product.price_silver }}' min="0" max="4">-->

@@ -150,6 +150,7 @@
         $scope.product = "";
         $scope.onlyNumbers = /^[1-9]+[0-9]*/;
         $scope.imgURI="";
+        $scope.cameraButtonClicked = false;
          
          console.log(" Image URI in edit prod controller is : "+$scope.imgURI);
         
@@ -190,6 +191,7 @@
                 ImageService.handleMediaDialog(type).then(function(imageURL) {
                      $scope.imgURI = imageURL;
                      console.log(" Image URI "+$scope.imgURI);
+                    $scope.cameraButtonClicked = true;
                 });
             });
         }

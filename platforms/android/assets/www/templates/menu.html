@@ -7,9 +7,9 @@
         <button class="button button-icon button-clear ion-navicon-round" menu-toggle="left">
         </button>
       </ion-nav-buttons>    
-         <ion-nav-buttons side="right">
+         <!--<ion-nav-buttons side="right">
             <img data-ng-src="img/Kitaki_small.jpg">
-      </ion-nav-buttons>
+      </ion-nav-buttons>-->
     </ion-nav-bar>
     <ion-nav-view name="menuContent"></ion-nav-view>
   </ion-side-menu-content>
@@ -19,51 +19,54 @@
       <h1 class="title"><img data-ng-src="img/Kitaki.jpg"></h1>
     </ion-header-bar>
     <ion-content>
-      <ion-list>
-        <div ng-show="userType == 'buyer' || userType == 'both'">
-            <ion-item menu-close class="item-divider item-light item-avatar" ng-style="{'line-height': 15 + 'px'}">
-              <img src="../img/venkman.jpg">Buyer Menu
+      <ion-list> <!--{{userRoleId}}-->
+        <div ng-show="userRoleId == 2 || userRoleId == 3 ">
+            <ion-item menu-close class="item-divider item-stable item-avatar item-top" ng-style="{'line-height': 15 + 'px'}">
+                <!--<img src="../img/venkman.jpg">--><label class="subdued"><b>Buyer menu</b></label>
             </ion-item>
-             <ion-item menu-close class="my-item item-light item-divider"  ng-style="{'line-height': 9 + 'px'}" ng-click="getSellersForBuyer()" href="#/app/showShops"  >
-                 <label class="subdued">My Shops</label> <!--ng-click="getSellersForBuyer()"-->
+             <ion-item menu-close class="my-item item-light"  ng-style="{'line-height': 9 + 'px'}" ng-click="getSellersForBuyer()" href="#/app/showShops"  >
+                 <i class="icon ion-bag"></i><label class="subdued">My shops</label> <!--ng-click="getSellersForBuyer()"-->
            </ion-item>
             <ion-item menu-close class="item-light"  href="#/app/buyerOrders" ng-style="{'line-height': 9 + 'px'}" ng-click="buyerOrders(userId)">
-                <i class="icon ion-clipboard"></i><label class="subdued">My Orders</label> <!--ng-click="buyerOrders(101)" -->
+                <i class="icon ion-clipboard"></i><label class="subdued">My orders</label> <!--ng-click="buyerOrders(101)" -->
            </ion-item>
             <ion-item menu-close class="item-light">
-                <i class="icon ion-android-favorite-outline"></i><label class="subdued"> My Favorite shops</label>
+                <i class="icon ion-android-favorite-outline"></i><label class="subdued">My favorite shops</label>
            </ion-item>
             <ion-item menu-close class="item-light" >
-                <label class="subdued">Business Requests</label>
+                <i class="icon ion-clipboard"></i><label class="subdued">Business requests</label>
            </ion-item>
         </div>
-        <div ng-show="userType == 'seller' || userType == 'both' ">
-             <ion-item menu-close class="item item-divider item-light item-avatar" ng-style="{'line-height': 9 + 'px'}">
-              <img src="../img/venkman.jpg"> Seller Menu
+        <div ng-show="userRoleId == 3 ">
+             <ion-item menu-close class="item-divider item-stable  item-avatar item-top">
+               <!--<img src="../img/venkman.jpg">--><label class="subdued"><b>Seller Menu</b></label>
             </ion-item>
             <ion-item menu-close class="item-light" href="#/app/sellerOrderSummary" ng-style="{'line-height': 9 + 'px'}" ng-click="viewSellerOrders(userId)">
-                <label class="subdued">Manage Orders </label> <!--href="#/app/sellerOrderSummary"-->
+                <i class="icon ion-clipboard"></i><label class="subdued">Manage orders </label> <!--href="#/app/sellerOrderSummary"-->
            </ion-item>
             <!--<ion-item menu-close class="item-light" href="#/app/sellerOrderSummary/productManage">
               Manage Products
            </ion-item>-->
-            <ion-item menu-close class="item-light" href="#/app/sellerOrderSummary/productManage1">
-              <label class="subdued">Manage Products</label>
+            <ion-item menu-close class="item-light " href="#/app/sellerOrderSummary/productManage1">
+              <i class="icon ion-android-clipboard"></i><label class="subdued">Manage products</label>
            </ion-item>
             <ion-item menu-close class="item-light" href="#/app/sellerOrderSummary/customerMgmt">
-              <label class="subdued">Manage Customers </label>
+              <i class="icon ion-android-contacts"></i><label class="subdued">Manage customers </label>
            </ion-item>
             <ion-item menu-close class="item-light" >
-                <label class="subdued"> Manage RFQ</label>
+                <i class="icon ion-pull-request"></i><label class="subdued">Manage RFQ</label>
+            </ion-item>
+            <ion-item menu-close class="item-light item-avatar item-top" href="#/app/sellerOrderSummary/myshop" >
+                <img src="../img/venkman.jpg"><label class="subdued"><i class="icon ion-android-favorite-assertive"></i>My Shop</label>
             </ion-item>
         </div>
-         <ion-item menu-close class="item-divider item-light" ng-style="{'line-height': 3 + 'px'}" href="#/app/about">
+         <ion-item menu-close class="item-divider item-stable" ng-style="{'line-height': 3 + 'px'}" href="#/app/about">
              <label class="subdued">About Us</label>
         </ion-item>
-        <ion-item menu-close class="item-divider item-light" ng-style="{'line-height': 2 + 'px'}" href="#/app/faq">
+        <ion-item menu-close class="item-divider item-stable" ng-style="{'line-height': 2 + 'px'}" href="#/app/faq">
             <label class="subdued"> FAQ</label>
         </ion-item>
-        <ion-item menu-close class="item-divider item-light" ng-style="{'line-height': 2 + 'px'}" ng-click="logout()">
+        <ion-item menu-close class="item-divider item-stable" ng-style="{'line-height': 2 + 'px'}" ng-click="logout()">
             <i class="icon ion-log-out"></i> <label class="subdued">Log out</label>
         </ion-item>
       </ion-list>

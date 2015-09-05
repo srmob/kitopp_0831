@@ -40,7 +40,7 @@
                 });
                 return q.promise;
           }
-          
+          //Get Orders from temp data table, after buyer places order in product selection page.
           self.getOrders = function(buyerId) {
             var parameters= [buyerId];
             return DBA.query(" select order_id,product_id,product_name,product_desc,order_qty,product_lot_size,product_sub_catg_name, order_price from order_details_temp od where  uid_buyer=(?) order by od.order_id" , parameters)

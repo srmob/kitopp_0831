@@ -36,9 +36,9 @@
                 $scope.orderDetails = details;
             });
        }; 
-        if($ionicHistory.backView().stateName == 'app.seller') {
-             $scope.viewOrderDetails();
-        }
+        //if($ionicHistory.backView().stateName == 'app.seller') {
+        $scope.viewOrderDetails();
+        //}
        
         var finalOrders=[];
         //console.log("final orders before process=  "+JSON.stringify($scope.finalOrders));
@@ -183,4 +183,105 @@
         
     };
     kitApp.controller('sellerCustomerMgmtCtrl',funcCustMgmt) ;
+    
+    var funcSellerShop = function($scope,$stateParams,$state,commonAppService,ProductInfo,ManageProduct,$ionicPopup,$cordovaCamera, $ionicPlatform, $ionicActionSheet, ImageService,ApiEndpoint,$timeout,base64){
+        
+        $scope.product = {};
+        
+        $scope.products = {};
+        
+        $scope.userId = commonAppService.getloggedInUserId();
+        $scope.productImageUrl =ApiEndpoint+"/product/productImage/productId/";
+        
+        $scope.addMedia = function() {
+            $scope.hideSheet = $ionicActionSheet.show({
+              buttons: [
+                { text: 'Take photo' },
+                { text: 'Photo from library' }
+              ],
+              titleText: 'Add images',
+              cancelText: 'Cancel',
+              buttonClicked: function(index) {
+                $scope.addImage(index);
+              }
+            });
+        }
+        
+        $scope.addImage = function(type) {
+            $scope.hideSheet();
+            $timeout(function(){
+                ImageService.handleMediaDialog(type).then(function(imageURL) {
+                    $scope.imgURI = imageURL;
+                });
+            });
+        }
+        
+        
+        /*$scope.updateImage = function(){
+            var imageStringB64 =  base64.encode($scope.imgURI);
+            
+            var saveProductToDB ="product[product_img_id1]="+imageStringB64+"&product[product_catg_id]="+$scope.product.product_catg_id+"&product[product_sub_catg_id]="+$scope.product.product_sub_catg_id+"&product[product_name]="+$scope.product.name+"&product[product_desc]="+$scope.product.desc+"&product[product_mfc_name]="+$scope.product.mfrName+"&product[product_min_qty]="+$scope.product.minQty+"&product[plan][1]="+$scope.product.price_platinum+"&product[plan][2]="+$scope.product.price_gold+"&product[plan][3]="+$scope.product.price_silver;
+            
+            ManageProduct.addSellerProduct($scope.userId,saveProductToDB).then(function(result){
+               if (result == 200) {
+                    $scope.alertProductAdd();
+                }else{
+                    $scope.alertProductAdd_error();
+                }
+               
+            });
+        }*/
+        
+        
+        // Populate the drop down list for category and related subcategories
+        $scope.getAllProductCategories = function() {
+            ProductInfo.getAllProdCatg($scope.userId).then(function(products){
+              $scope.productCatg = products;
+            });
+        }
+        $scope.getAllProductCategories();
+        
+        
+        $scope.getProductsForSeller = function(){
+            ManageProduct.getSellersProducts($scope.userId).then(function(results){
+                $scope.products  = results;
+                console.log("Products in my shop are"+JSON.stringify($scope.products));
+                
+            });
+        }
+        $timeout($scope.getProductsForSeller(),1000);
+        //$scope.getProductsForSeller();
+        
+        $scope.selectProductEdit = function(product_id){
+            console.log("Edit product id : "+product_id+"-for seller id-"+$scope.userId);
+            $state.go("app.seller.manageProduct.edit",{productId:product_id,sellerId:$scope.userId});
+        }
+        
+        
+        
+        $scope.takePicture = function() {
+            var options = { 
+                quality : 75, 
+                destinationType : Camera.DestinationType.DATA_URL, 
+                sourceType : Camera.PictureSourceType.CAMERA, 
+                allowEdit : false,
+                encodingType: Camera.EncodingType.JPEG,
+                targetWidth: 100,
+                targetHeight: 100,
+                popoverOptions: CameraPopoverOptions,
+                saveToPhotoAlbum: false
+            };
+
+            $cordovaCamera.getPicture(options).then(function(imageData) {
+                console.log(" &&&&& Image from camera is--->"+imageData)
+                $scope.imgURI = "data:image/jpeg;base64," + imageData;
+            }, function(err) {
+                // An error occured. Show a message to the user
+                 console.log(" *** Error in camera function--->"+err);
+            });
+        };
+    
+    };
+    
+    kitApp.controller('sellerShopCtrl',funcSellerShop) ;
 }());

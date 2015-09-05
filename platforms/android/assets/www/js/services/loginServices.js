@@ -28,6 +28,7 @@
             
               //.then(function(abc){
              .then(function(result){
+                //console.log("result from Login user is "+JSON.stringify(result));
                 var serverValues = angular.fromJson(result.data);
                 if (serverValues.result) {
                     commonAppService.setToken("JWT",serverValues.jwt);
@@ -39,8 +40,9 @@
                         console.log("User details are "+JSON.stringify(data));
                         commonAppService.setloggedInUserId(data.data.uid);
                         commonAppService.setloggedInUserType(data.data.role);
+                        commonAppService.setloggedInUserRole(data.data.role_id);
                     }
-                    }
+                }
                 return serverValues.result;
                 //return DBA.processResultSethttp(result);// for local db
               },function(error) {

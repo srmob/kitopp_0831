@@ -4,13 +4,17 @@
         <ion-content>
             <!--{{product}} - {{userId}}-->
            <!-- {{productCatg}} - {{userId}}-->
-            <div class="list list-inset"> IMG  is {{imgURI}}
+            <div class="list list-inset"> <!--IMG  is {{imgURI}}--> cc={{cameraButtonClicked}}
              <label id = "" class="item item-input">
                 <span class="input-label">Product Image</span>
-                <img ng-show="imgURI !== undefined" ng-src="{{productImageUrl}}{{product.product_id}}/index/0">
-                <!--<img ng-src="{{imageURI}}" ng-show="imgURI !== undefined" ng-model="product.product_img_id1">-->
+                <!--<img ng-show="imgURI !== undefined" ng-src="{{productImageUrl}}{{product.product_id}}/index/0">
+                <img ng-src="{{imageURI}}" ng-show="imgURI !== undefined" ng-model="product.product_img_id1">
                 <img ng-show="imgURI === null" ng-src="http://placehold.it/70x50">
-                <img ng-show="imgURI !== null" ng-src="{{imgURI}}">
+                <img ng-show="imgURI !== null" ng-src="{{imgURI}}">-->
+                
+                <img ng-show="!cameraButtonClicked" ng-src="{{productImageUrl}}{{product.product_id}}/index/0">
+                <img ng-show="cameraButtonClicked" ng-src="data:image/jpeg;base64,{{imgURI}}/120x100">
+                 
                 <button class="button button-small button-outline  button-assertive"ng-click="addMedia()">
                         <i class="icon ion-ios-camera-outline"></i>
                 </button><!--<div class="spacer" style="width: 10px;"></div>

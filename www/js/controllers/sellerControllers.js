@@ -36,9 +36,9 @@
                 $scope.orderDetails = details;
             });
        }; 
-        if($ionicHistory.backView().stateName == 'app.seller') {
-             $scope.viewOrderDetails();
-        }
+        //if($ionicHistory.backView().stateName == 'app.seller') {
+        $scope.viewOrderDetails();
+        //}
        
         var finalOrders=[];
         //console.log("final orders before process=  "+JSON.stringify($scope.finalOrders));

@@ -100,6 +100,8 @@
 /Shashi-data/sriganesh/gitcode/kitopp_0831/platforms/android/assets/www/js/projectlibs/imei.js \
 /Shashi-data/sriganesh/gitcode/kitopp_0831/platforms/android/assets/www/js/projectlibs/ionic-ion-autoListDivider.js \
 /Shashi-data/sriganesh/gitcode/kitopp_0831/platforms/android/assets/www/js/projectlibs/ngTable \
+/Shashi-data/sriganesh/gitcode/kitopp_0831/platforms/android/assets/www/js/projectlibs/PushCustom.js \
+/Shashi-data/sriganesh/gitcode/kitopp_0831/platforms/android/assets/www/js/projectlibs/PushNotification.js \
 /Shashi-data/sriganesh/gitcode/kitopp_0831/platforms/android/assets/www/js/projectlibs/semantic.js \
 /Shashi-data/sriganesh/gitcode/kitopp_0831/platforms/android/assets/www/js/projectlibs/uimask.js \
 /Shashi-data/sriganesh/gitcode/kitopp_0831/platforms/android/assets/www/js/projectlibs/unique.js \
@@ -495,6 +497,7 @@
 /Shashi-data/sriganesh/gitcode/kitopp_0831/platforms/android/assets/www/templates/sellerOrderConfirmation.html \
 /Shashi-data/sriganesh/gitcode/kitopp_0831/platforms/android/assets/www/templates/sellerOrderDetails.html \
 /Shashi-data/sriganesh/gitcode/kitopp_0831/platforms/android/assets/www/templates/sellerOrderSummary_1.html \
+/Shashi-data/sriganesh/gitcode/kitopp_0831/platforms/android/assets/www/templates/sellershop.html \
 /Shashi-data/sriganesh/gitcode/kitopp_0831/platforms/android/assets/www/templates/showShops.html \
 /Shashi-data/sriganesh/gitcode/kitopp_0831/platforms/android/assets/www/templates/userPin1.html \
 /Shashi-data/sriganesh/gitcode/kitopp_0831/platforms/android/assets/www/templates/welcome.html \

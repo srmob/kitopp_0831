@@ -78,12 +78,13 @@
     //angular.module('kitakiapp').factory('DBA',dbAccessFunc);
     kitApp.factory('DBA',dbAccessFunc);
     
-    var appServices = function($window){
+    var appServices = function($window,ApiEndpoint){
         var deviceId;
         var loggedInUserId;
         var loggedInUserType;
+        var loggedInUserRole;
         var loggedInUserPhoneNum;
-        var orderDetails=[];
+        //var orderDetails=[];
         return {
             getDeviceId:function () {
                 return deviceId;
@@ -123,6 +124,18 @@
             },
             getToken: function(key, defaultValue) {
                 return $window.localStorage[key] || defaultValue;
+            },
+            getloggedInUserRole:function () {
+                return loggedInUserRole;
+            },
+            setloggedInUserRole:function (type) {
+                console.log("User Role ID being set as->"+type);
+                loggedInUserRole=type;
+                return loggedInUserRole;
+            },
+            getDeviceRegdStatus: function(id){
+                console.log("Check Device Registration Status for device ID- "+id);
+                return $http.get(ApiEndpoint + '/user/userLogin/deviceId/'+id,{skipAuthorization: true});
             }
         };
     }
