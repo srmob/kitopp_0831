@@ -43,12 +43,12 @@
               <!--{{productImageUrl}}{{row.product_id}}-->
                 <!--First Row of displaying Item Name, Product ID and description-->
                 <div class="row item item-stable item-divider" >
-                    <div class="col col-75" ng-click="more(products[$index])">
+                    <div class="col col-75 col-top" ng-click="more(products[$index])">
                         {{products[$index].product_name}} 
                         <span class="item-note" >[ ID: {{products[$index].product_id}} ]</span>
                         <div class="item-text-wrap descEllip"> {{ products[$index].product_desc }}  </div>
                     </div> 
-                    <div class="col col-25"> 
+                    <div class="col col-25 col-bottom"> 
                         <label class="checkbox checkbox-dark checkbox-square"> 
                             <input type="checkbox"  checklist-model="checkboxes.prodid" 
                             checklist-value="products[$index].product_id" checklist-change="checkBoxClicked([$index])" >  <!--ng-change="checkBoxChange(products[$index].PROD_MIN_QTY,products[$index].product_id)"-->
@@ -117,12 +117,12 @@
                 <div class="col col-50 list inset" style="border:1px" ng-if="$index+1 < products.length" ng-form='rowProductForm1' name="rowProductForm1">
                        <!--First Row of displaying Item Name, Product ID and description-->
                         <div class="row item item-stable item-divider">
-                            <div class="col col-75" ng-click="more(products[$index+1])">
+                            <div class="col col-75 col-top" ng-click="more(products[$index+1])">
                                 {{products[$index+1].product_name}} 
                                 <span class="item-note" >[ ID: {{products[$index+1].product_id}} ]</span>
                                 <div class="item-text-wrap descEllip"> {{ products[$index+1].product_desc }}  </div>
                             </div> 
-                            <div class="col col-25"> 
+                            <div class="col col-25 col-bottom"> 
                                 <label class="checkbox checkbox-dark checkbox-square"> 
                                  <input type="checkbox"  checklist-model="checkboxes.prodid" 
                             checklist-value="products[$index+1].product_id" checklist-change="checkBoxClicked([$index+1])" >

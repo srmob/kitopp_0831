@@ -36,6 +36,7 @@
                     if (typeof jwtTokenUserData !== 'undefined') {
                         var encoded = jwtTokenUserData.split('.')[1];
                         data = JSON.parse(urlBase64Decode(encoded));
+                        console.log("User details are "+JSON.stringify(data));
                         commonAppService.setloggedInUserId(data.data.uid);
                         commonAppService.setloggedInUserType(data.data.role);
                     }

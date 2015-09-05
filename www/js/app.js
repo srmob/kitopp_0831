@@ -45,8 +45,8 @@ var kitApp = angular.module('starter', ['ionic','ui.unique','checklist-model','n
         var deviceID = device.uuid;
         commonAppService.setDeviceId(device.uuid);
         //commonAppService.setDeviceId("83265647bff10fb5");
-        //commonAppService.setDeviceId("a9f990dae1bff6da"); //seller
-        //commonAppService.setDeviceId("1a998ca53dbe55b2"); //- buyer
+        //commonAppService.setDeviceId("8ef01a374e602841"); //seller - 1901
+        //commonAppService.setDeviceId("1a998ca53dbe55b2"); //- buyer - 4524
         console.log("Device ID....... "+commonAppService.getDeviceId());
         
         //Fetch the phone number and set if available
@@ -319,6 +319,15 @@ var kitApp = angular.module('starter', ['ionic','ui.unique','checklist-model','n
             'menuContent@app': {
               templateUrl: "templates/buyerCategory.html",
               controller: 'sellerCustomerMgmtCtrl'
+            }
+        }
+    })
+    .state('app.seller.myShop', {
+        url: "/myshop",
+        views: {
+            'menuContent@app': {
+              templateUrl: "templates/sellershop.html",
+              controller: 'sellerShopCtrl'
             }
         }
     })

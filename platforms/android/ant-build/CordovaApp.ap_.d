@@ -53,6 +53,7 @@
 /Shashi-data/sriganesh/gitcode/kitopp_0831/platforms/android/assets/www/img/sellers \
 /Shashi-data/sriganesh/gitcode/kitopp_0831/platforms/android/assets/www/img/softtoy.jpeg \
 /Shashi-data/sriganesh/gitcode/kitopp_0831/platforms/android/assets/www/img/teddy.jpeg \
+/Shashi-data/sriganesh/gitcode/kitopp_0831/platforms/android/assets/www/img/venkman.jpg \
 /Shashi-data/sriganesh/gitcode/kitopp_0831/platforms/android/assets/www/img/welcome_kitaki.jpg \
 /Shashi-data/sriganesh/gitcode/kitopp_0831/platforms/android/assets/www/img/welcome_page.jpg \
 /Shashi-data/sriganesh/gitcode/kitopp_0831/platforms/android/assets/www/img/welcome_page_black copy.png \
